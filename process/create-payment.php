@@ -118,6 +118,18 @@ if (true) {
         // Stocker l'ID de paiement Mollie en session
         $_SESSION['mollie_payment_id'] = $payment->id;
         
+        // Stocker les informations de commande en session pour la page de confirmation
+        $_SESSION['order'] = [
+            'order_id' => $order_id,
+            'service_id' => $service_id,
+            'service_name' => $service_name,
+            'zone' => $zone,
+            'name' => $name,
+            'email' => $email,
+            'total_price' => $total_price,
+            'form_data' => $form_data
+        ];
+        
         // Rediriger vers la page de paiement Mollie
         header("Location: " . $payment->getCheckoutUrl(), true, 303);
         exit;

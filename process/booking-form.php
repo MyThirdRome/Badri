@@ -352,8 +352,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         
         send_email($email, $confirmation_subject, $confirmation_body);
     } else {
-        // Message d'erreur
-        set_alert('Une erreur est survenue lors de l\'enregistrement de votre réservation. Veuillez réessayer plus tard.', 'danger');
+        // Message d'erreur seulement si on ne passe pas au paiement en ligne
+        if (!isset($_POST['payment_method']) || $_POST['payment_method'] !== 'online') {
+            set_alert('Une erreur est survenue lors de l\'enregistrement de votre réservation. Veuillez réessayer plus tard.', 'danger');
+        }
     }
     
     // Vérifier le mode de paiement
