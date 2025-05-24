@@ -41,14 +41,8 @@
                         <h3>Contactez-nous</h3>
                         <address class="contact-info">
                             <p><i class="fas fa-map-marker-alt"></i> <?php echo COMPANY_ADDRESS; ?></p>
-                            <p><i class="fas fa-phone"></i> <a href="tel:<?php echo str_replace(' ', '', COMPANY_PHONE); ?>"><?php echo COMPANY_PHONE; ?></a></p>
-                            <p><i class="fas fa-envelope"></i> <a href="mailto:<?php echo COMPANY_EMAIL; ?>"><?php echo COMPANY_EMAIL; ?></a></p>
+                                <p><i class="fas fa-envelope"></i> <a href="mailto:<?php echo COMPANY_EMAIL; ?>"><?php echo COMPANY_EMAIL; ?></a></p>
                         </address>
-                        <div class="social-links">
-                            <a href="#" title="Facebook" target="_blank"><i class="fab fa-facebook-f"></i></a>
-                            <a href="#" title="Instagram" target="_blank"><i class="fab fa-instagram"></i></a>
-                            <a href="#" title="LinkedIn" target="_blank"><i class="fab fa-linkedin-in"></i></a>
-                        </div>
                     </div>
                 </div>
             </div>

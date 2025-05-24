@@ -26,13 +26,7 @@ require_once __DIR__ . '/functions.php';
         <div class="header-top">
             <div class="container">
                 <div class="contact-info">
-                    <a href="tel:<?php echo str_replace(' ', '', COMPANY_PHONE); ?>"><i class="fas fa-phone"></i> <?php echo COMPANY_PHONE; ?></a>
                     <a href="mailto:<?php echo COMPANY_EMAIL; ?>"><i class="fas fa-envelope"></i> <?php echo COMPANY_EMAIL; ?></a>
-                </div>
-                <div class="social-links">
-                    <a href="#" title="Facebook" target="_blank"><i class="fab fa-facebook-f"></i></a>
-                    <a href="#" title="Instagram" target="_blank"><i class="fab fa-instagram"></i></a>
-                    <a href="#" title="LinkedIn" target="_blank"><i class="fab fa-linkedin-in"></i></a>
                 </div>
             </div>
         </div>

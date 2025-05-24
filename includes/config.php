@@ -4,8 +4,8 @@ define('SITE_TITLE', 'Badri Livraison & Transport Marchandises');
 define('SITE_DESCRIPTION', 'Services de livraison de repas et transport de marchandises à Lille et ses environs');
 define('COMPANY_NAME', 'Badri Livraison & Transport Marchandises');
 define('COMPANY_ADDRESS', '41 RUE Jacquemars Giélée, 59800 Lille, FRANCE');
-define('COMPANY_PHONE', '06 XX XX XX XX'); // Placeholder phone number
-define('COMPANY_EMAIL', 'contact@badri-transport.fr'); // Placeholder email
+define('COMPANY_PHONE', ''); // Removed as requested
+define('COMPANY_EMAIL', 'bonjour@badrilivraison.com');
 define('COMPANY_SIRET', '92902956900019');
 define('COMPANY_SIREN', '929 029 569');
 
