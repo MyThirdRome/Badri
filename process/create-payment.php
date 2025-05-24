@@ -5,17 +5,29 @@ require_once __DIR__ . '/../includes/config.php';
 require_once __DIR__ . '/../includes/functions.php';
 require_once __DIR__ . '/../includes/mollie-config.php';
 
-// Vérifier si le formulaire a été soumis
-if (true) { // Toujours exécuter pour permettre le POST forward
-    // Vérification du jeton CSRF désactivée pour le debugging
-    // if (!isset($_POST['csrf_token']) || !verify_csrf_token($_POST['csrf_token'])) {
-    //     set_alert('Une erreur de sécurité est survenue. Veuillez réessayer.', 'danger');
-    //     redirect('../booking.php');
-    //     exit;
-    // }
+// Forcer l'utilisation des données de test pour le débogage
+if (true) {
+    // Si les données de réservation ne sont pas en session, utiliser des valeurs par défaut
+    if (!isset($_SESSION['reservation_form_data'])) {
+        $_SESSION['reservation_form_data'] = [
+            'service' => 1,
+            'delivery_zone' => 'Zone 1',
+            'name' => 'Client Test',
+            'email' => 'test@example.com',
+            'express_delivery' => '1',
+            'insurance' => '1'
+        ];
+    }
+    // Récupérer les données du formulaire depuis la session
+    $form_data = $_SESSION['reservation_form_data'];
+    
+    // Log des données reçues pour le débogage
+    $debug_data = "Données du formulaire (session): " . print_r($form_data, true);
+    error_log($debug_data);
+    file_put_contents('../payment_debug.log', $debug_data, FILE_APPEND);
     
     // Récupérer les données de la commande
-    $service_id = isset($_POST['service']) ? (int)$_POST['service'] : 0;
+    $service_id = isset($form_data['service']) ? (int)$form_data['service'] : 0;
     $service_name = '';
     foreach ($services as $service) {
         if ($service['id'] == $service_id) {
@@ -24,9 +36,9 @@ if (true) { // Toujours exécuter pour permettre le POST forward
         }
     }
     
-    $zone = isset($_POST['delivery_zone']) ? clean_string($_POST['delivery_zone']) : '';
-    $name = isset($_POST['name']) ? clean_string($_POST['name']) : '';
-    $email = isset($_POST['email']) ? clean_string($_POST['email']) : '';
+    $zone = isset($form_data['delivery_zone']) ? clean_string($form_data['delivery_zone']) : '';
+    $name = isset($form_data['name']) ? clean_string($form_data['name']) : '';
+    $email = isset($form_data['email']) ? clean_string($form_data['email']) : '';
     
     // Calculer le prix total
     $base_price = calculate_delivery_price($zone, $service_id);

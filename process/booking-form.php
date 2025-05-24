@@ -358,22 +358,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     
     // Vérifier le mode de paiement
     if (isset($_POST['payment_method']) && $_POST['payment_method'] === 'online') {
-        // Si le paiement en ligne est sélectionné, soumettre les données de réservation au processus de paiement Mollie
-        echo '<form id="payment-form" action="../process/create-payment.php" method="post">';
+        // Stocker les données du formulaire en session pour les récupérer dans le processus de paiement
+        $_SESSION['reservation_form_data'] = $_POST;
         
-        // Transférer toutes les données du formulaire
-        foreach ($_POST as $key => $value) {
-            if (is_array($value)) {
-                foreach ($value as $item) {
-                    echo '<input type="hidden" name="' . htmlspecialchars($key) . '[]" value="' . htmlspecialchars($item) . '">';
-                }
-            } else {
-                echo '<input type="hidden" name="' . htmlspecialchars($key) . '" value="' . htmlspecialchars($value) . '">';
-            }
-        }
-        
-        echo '</form>';
-        echo '<script>document.getElementById("payment-form").submit();</script>';
+        // Rediriger vers le processus de paiement
+        header('Location: ../process/create-payment.php');
         exit;
     } else {
         // Sinon, rediriger vers la page de confirmation
