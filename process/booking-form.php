@@ -356,8 +356,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         set_alert('Une erreur est survenue lors de l\'enregistrement de votre réservation. Veuillez réessayer plus tard.', 'danger');
     }
     
-    // Rediriger vers la page de réservation
-    redirect('../booking.php');
+    // Vérifier le mode de paiement
+    if (isset($_POST['payment_method']) && $_POST['payment_method'] === 'online') {
+        // Si le paiement en ligne est sélectionné, rediriger vers le processus de paiement Mollie
+        redirect('../process/create-payment.php');
+    } else {
+        // Sinon, rediriger vers la page de confirmation
+        redirect('../booking.php');
+    }
     exit;
 } else {
     // Si le formulaire n'a pas été soumis, rediriger vers la page de réservation

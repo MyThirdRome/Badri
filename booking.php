@@ -219,14 +219,73 @@ unset($_SESSION['form_errors']);
                     
                     <div class="form-group">
                         <label for="payment_method" class="form-label">Mode de paiement*</label>
-                        <select id="payment_method" name="payment_method" class="form-control" required>
-                            <option value="">Sélectionnez un mode de paiement</option>
-                            <option value="Carte bancaire à la livraison" <?php echo (isset($form_data['payment_method']) && $form_data['payment_method'] === 'Carte bancaire à la livraison') ? 'selected' : ''; ?>>Carte bancaire à la livraison</option>
-                            <option value="Espèces à la livraison" <?php echo (isset($form_data['payment_method']) && $form_data['payment_method'] === 'Espèces à la livraison') ? 'selected' : ''; ?>>Espèces à la livraison</option>
-                            <option value="Virement bancaire" <?php echo (isset($form_data['payment_method']) && $form_data['payment_method'] === 'Virement bancaire') ? 'selected' : ''; ?>>Virement bancaire</option>
-                        </select>
-                        <div class="form-hint">Le paiement en ligne sera bientôt disponible</div>
+                        <div class="payment-options">
+                            <div class="payment-option">
+                                <input type="radio" id="payment_online" name="payment_method" value="online" checked>
+                                <label for="payment_online">
+                                    <span class="payment-option-title">Paiement en ligne</span>
+                                    <span class="payment-option-description">Payer maintenant par carte bancaire via Mollie (sécurisé)</span>
+                                    <div class="payment-icons">
+                                        <i class="fab fa-cc-visa"></i>
+                                        <i class="fab fa-cc-mastercard"></i>
+                                        <i class="fab fa-cc-apple-pay"></i>
+                                    </div>
+                                </label>
+                            </div>
+                            <div class="payment-option">
+                                <input type="radio" id="payment_cash" name="payment_method" value="Espèces à la livraison">
+                                <label for="payment_cash">
+                                    <span class="payment-option-title">Espèces à la livraison</span>
+                                    <span class="payment-option-description">Payer en espèces au moment de la livraison</span>
+                                </label>
+                            </div>
+                        </div>
                     </div>
+                    
+                    <style>
+                    .payment-options {
+                        display: flex;
+                        flex-direction: column;
+                        gap: 15px;
+                        margin-top: 10px;
+                    }
+                    .payment-option {
+                        border: 1px solid #ddd;
+                        border-radius: var(--border-radius);
+                        overflow: hidden;
+                    }
+                    .payment-option input[type="radio"] {
+                        display: none;
+                    }
+                    .payment-option label {
+                        display: block;
+                        padding: 15px;
+                        cursor: pointer;
+                        transition: var(--transition);
+                    }
+                    .payment-option input[type="radio"]:checked + label {
+                        background-color: hsla(var(--primary), 0.05);
+                        border-left: 4px solid hsl(var(--primary));
+                    }
+                    .payment-option-title {
+                        display: block;
+                        font-weight: 600;
+                        margin-bottom: 5px;
+                    }
+                    .payment-option-description {
+                        display: block;
+                        font-size: 14px;
+                        color: hsl(var(--medium));
+                    }
+                    .payment-icons {
+                        margin-top: 10px;
+                        font-size: 24px;
+                        color: hsl(var(--dark));
+                    }
+                    .payment-icons i {
+                        margin-right: 10px;
+                    }
+                    </style>
                     
                     <div class="form-group">
                         <div class="form-check">
