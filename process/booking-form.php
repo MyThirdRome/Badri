@@ -358,10 +358,26 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     
     // Vérifier le mode de paiement
     if (isset($_POST['payment_method']) && $_POST['payment_method'] === 'online') {
-        // Si le paiement en ligne est sélectionné, rediriger vers le processus de paiement Mollie
-        redirect('../process/create-payment.php');
+        // Si le paiement en ligne est sélectionné, soumettre les données de réservation au processus de paiement Mollie
+        echo '<form id="payment-form" action="../process/create-payment.php" method="post">';
+        
+        // Transférer toutes les données du formulaire
+        foreach ($_POST as $key => $value) {
+            if (is_array($value)) {
+                foreach ($value as $item) {
+                    echo '<input type="hidden" name="' . htmlspecialchars($key) . '[]" value="' . htmlspecialchars($item) . '">';
+                }
+            } else {
+                echo '<input type="hidden" name="' . htmlspecialchars($key) . '" value="' . htmlspecialchars($value) . '">';
+            }
+        }
+        
+        echo '</form>';
+        echo '<script>document.getElementById("payment-form").submit();</script>';
+        exit;
     } else {
         // Sinon, rediriger vers la page de confirmation
+        set_alert('Votre réservation a été enregistrée avec succès. Vous paierez en espèces à la livraison.', 'success');
         redirect('../booking.php');
     }
     exit;
