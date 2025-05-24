@@ -1,6 +1,6 @@
 <?php
 // Configuration de l'API Mollie
-define('MOLLIE_API_KEY', 'test_gGa6CwgnggD3KKngR2PdhF5VnHJ38N'); // Clé API de test
+define('MOLLIE_API_KEY', 'live_F6xNUUkn3rvtruy8DH3qcaJADeSrS2'); // Clé API de production
 define('MOLLIE_PROFILE_ID', 'pfl_iW5zHjyvZE'); // ID de profil
 
 // Obtenir l'URL complète du site (en prenant en compte que nous sommes sur Replit)
